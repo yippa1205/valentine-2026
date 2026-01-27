@@ -369,7 +369,16 @@
         window.addEventListener('load', function() {
             // Load first song
             loadSong(0);
-            
+
+            // Auto-play the music when page loads
+            music.play().then(() => {
+                isPlaying = true;
+                playPauseBtn.textContent = '⏸️';
+            }).catch(err => {
+                console.log('Autoplay blocked by browser:', err);
+                // If autoplay is blocked, user will need to click play manually
+            });
+
             // Start creating hearts immediately
             startHearts();
         });
